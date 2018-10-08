@@ -7,6 +7,7 @@ class StringUtil:
     ZERO = '0'
     ONE = '1'
     TWO = '2'
+    PROJECT_NAME = 'abracawhat'
 
     class Card:
         YONGYONG = 'YONGYONG'
