@@ -8,3 +8,6 @@ class ModelUtilsMixin(TimeFramedModel, TimeStampedModel, StatusModel, SoftDeleta
     STATUS = ChoicesUtil.DEFAULT_STATUS
 
     tracker = FieldTracker()
+
+    class Meta:
+        abstract = True

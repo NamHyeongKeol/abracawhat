@@ -27,6 +27,7 @@ class StringUtil:
 class NumUtil:
     DEFAULT_HP = 6
     DEFAULT_SCORE = 0
+    DEFAULT_ROUND = 1
 
 
 class FieldUtil:
