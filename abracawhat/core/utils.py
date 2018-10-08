@@ -44,6 +44,7 @@ class ChoicesUtil:
                            (8, StringUtil.Card.POTION),
                            )
 
+    DEFAULT_STATUS = Choices('DEFAULT')
     GAME_STATUS = Choices('CREATING', 'ONGOING', 'PENDING', 'DELETED', 'FINISHIED', )
     MOVE_STATUS = Choices('SUCCEED', 'FAILED', )
     CARD_STATUS = Choices('FIELD', 'SECRET', 'USED', 'SECRET_BUT_EXPOSED', 'STAND_BY', )
