@@ -143,3 +143,4 @@ REST_FRAMEWORK = {
     )
 }
 
+SHELL_PLUS = "ipython"
