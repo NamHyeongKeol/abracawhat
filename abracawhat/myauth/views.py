@@ -1,5 +1,7 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from rest_framework import viewsets
+
+from abracawhat.myauth.models import User
 from .serializers import UserSerializer, GroupSerializer
 
 
