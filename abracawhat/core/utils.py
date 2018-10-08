@@ -8,6 +8,10 @@ class StringUtil:
     ONE = '1'
     TWO = '2'
     PROJECT_NAME = 'abracawhat'
+    self = 'self'
+    SELF = 'SELF'
+    left = 'left'
+    right = 'right'
 
     class Card:
         YONGYONG = 'YONGYONG'
@@ -18,6 +22,11 @@ class StringUtil:
         BLIZZARD = 'BLIZZARD'
         FIRE = 'FIRE'
         POTION = 'POTION'
+
+
+class NumUtil:
+    DEFAULT_HP = 6
+    DEFAULT_SCORE = 0
 
 
 class FieldUtil:
@@ -34,6 +43,10 @@ class ChoicesUtil:
                            (7, StringUtil.Card.FIRE),
                            (8, StringUtil.Card.POTION),
                            )
+
+    GAME_STATUS = Choices('CREATING', 'ONGOING', 'PENDING', 'DELETED', 'FINISHIED', )
+    MOVE_STATUS = Choices('SUCCEED', 'FAILED', )
+    CARD_STATUS = Choices('FIELD', 'SECRET', 'USED', 'SECRET_BUT_EXPOSED', 'STAND_BY', )
 
 
 class ListUtil:
