@@ -147,3 +147,7 @@ REST_FRAMEWORK = {
 }
 
 SHELL_PLUS = "ipython"
+# from django.apps import apps
+# SHELL_PLUS_POST_IMPORTS = [
+#     ('{}.models'.format(app), '*',) for app in apps.get_models()
+# ]
