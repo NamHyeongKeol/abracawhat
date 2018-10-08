@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
     'django_extensions',
+    'abracawhat.myauth',
+    'abracawhat.core',
+    'abracawhat.game',
 ]
 
 # for django.contrib.sites and allauth
