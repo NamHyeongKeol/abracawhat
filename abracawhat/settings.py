@@ -153,4 +153,4 @@ SHELL_PLUS_POST_IMPORTS = [
     (app, '*',) for app in INSTALLED_APPS if app.startswith(StringUtil.PROJECT_NAME)
 ]
 
-AUTH_USER_MODEL = 'abracawhat.auth.User'
+AUTH_USER_MODEL = 'myauth.User'
