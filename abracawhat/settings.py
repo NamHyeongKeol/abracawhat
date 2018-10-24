@@ -150,7 +150,7 @@ REST_FRAMEWORK = {
 
 SHELL_PLUS = "ipython"
 SHELL_PLUS_POST_IMPORTS = [
-    (app, '*',) for app in INSTALLED_APPS if app.startswith(StringUtil.PROJECT_NAME)
+    ('.'.join([app, 'models']), '*',) for app in INSTALLED_APPS if app.startswith(StringUtil.PROJECT_NAME)
 ]
 
 AUTH_USER_MODEL = 'myauth.User'
