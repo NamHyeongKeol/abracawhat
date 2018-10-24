@@ -152,5 +152,6 @@ SHELL_PLUS = "ipython"
 SHELL_PLUS_POST_IMPORTS = [
     ('.'.join([app, 'models']), '*',) for app in INSTALLED_APPS if app.startswith(StringUtil.PROJECT_NAME)
 ]
+SHELL_PLUS_POST_IMPORTS += [('abracawhat.core.utils', '*')]
 
 AUTH_USER_MODEL = 'myauth.User'
