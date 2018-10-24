@@ -7,7 +7,7 @@ from abracawhat.core.utils import ChoicesUtil, NumUtil, StringUtil
 
 class Game(ModelUtilsMixin):
     STATUS = ChoicesUtil.GAME_STATUS
-    winner = models.ForeignKey('Player', on_delete=models.CASCADE, db_index=True, related_name='+')
+    winner = models.ForeignKey('Player', on_delete=models.CASCADE, db_index=True, null=True, related_name='+')
     users = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Player', related_name='games')
 
 
