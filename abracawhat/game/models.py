@@ -129,11 +129,11 @@ class PlayerRound(ModelUtilsMixin):
 
     @property
     def left(self):
-        return self.player.left
+        return self.player.left.player_rounds.get(round=self.round)
 
     @property
     def right(self):
-        return self.player.right
+        return self.player.right.player_rounds.get(round=self.round)
 
 
 class Turn(ModelUtilsMixin):
