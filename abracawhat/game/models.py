@@ -47,6 +47,7 @@ class Game(ModelUtilsMixin):
 
         return game
 
+    # return not players, but game
     @transaction.atomic(savepoint=False)
     def set_players(self, user_id_list=None):
         random.shuffle(user_id_list)
@@ -129,11 +130,11 @@ class PlayerRound(ModelUtilsMixin):
 
     @property
     def left(self):
-        return self.player.left
+        return self.player.left.player_rounds.get(round=self.round)
 
     @property
     def right(self):
-        return self.player.right
+        return self.player.right.player_rounds.get(round=self.round)
 
 
 class Turn(ModelUtilsMixin):
