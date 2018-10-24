@@ -77,14 +77,39 @@ class Player(ModelUtilsMixin):
     STATUS = ChoicesUtil.GAME_STATUS
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, db_index=True, related_name='players')
     game = models.ForeignKey(Game, on_delete=models.CASCADE, db_index=True, related_name='players')
-    left = models.ForeignKey(StringUtil.self, on_delete=models.CASCADE, related_name='+')
-    right = models.ForeignKey(StringUtil.self, on_delete=models.CASCADE, related_name='+')
+    left = models.ForeignKey(StringUtil.self, on_delete=models.CASCADE, null=True, related_name='+')
+    right = models.ForeignKey(StringUtil.self, on_delete=models.CASCADE, null=True, related_name='+')
+
+    @classmethod
+    def create_player(cls, user_id=None, game_id=None, left=None, right=None, status=None):
+        if user_id is None or game_id is None:
+            return None
+
+        if status is None:
+            status = ChoicesUtil.GAME_STATUS.ONGOING
+
+        player = cls.objects.create(user_id=user_id, game_id=game_id, left=left, right=right, status=status)
+
+        return player
 
 
 class Round(ModelUtilsMixin):
     STATUS = ChoicesUtil.GAME_STATUS
-    game = models.ForeignKey(Game, on_delete=models.CASCADE, db_index=True)
-    num = models.IntegerField(default=NumUtil.DEFAULT_SCORE, db_index=True)
+    game = models.ForeignKey(Game, on_delete=models.CASCADE, db_index=True, related_name='rounds')
+    num = models.IntegerField(default=NumUtil.DEFAULT_ROUND, db_index=True)
+
+    @classmethod
+    @transaction.atomic(savepoint=False)
+    def create_round(cls, game_id=None, status=None):
+        if game_id is None:
+            return None
+
+        if status is None:
+            status = ChoicesUtil.GAME_STATUS.ONGOING
+
+        round = cls.objects.create(game_id=game_id, status=status, num=Game.objects.get(id=game_id).last_round_num + 1)
+
+        return round
 
 
 class PlayerRound(ModelUtilsMixin):
