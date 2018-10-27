@@ -155,7 +155,7 @@ class PlayerRound(ModelUtilsMixin):
         if status is None:
             status = ChoicesUtil.GAME_STATUS.ONGOING
 
-        player_round = cls.objects.create(user_id=player_id, game_id=round_id, hp=hp, score=score, status=status)
+        player_round = cls.objects.create(player_id=player_id, round_id=round_id, hp=hp, score=score, status=status)
 
         return player_round
 
