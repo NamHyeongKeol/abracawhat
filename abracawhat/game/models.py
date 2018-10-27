@@ -178,3 +178,15 @@ class Card(ModelUtilsMixin):
     round = models.ForeignKey(Round, on_delete=models.CASCADE, db_index=True, related_name='cards')
     move = models.ForeignKey(Move, on_delete=models.CASCADE, db_index=True, null=True, related_name='cards')
     name = models.CharField(max_length=100, choices=ChoicesUtil.CARD_CHOICES, db_index=True)
+
+    @classmethod
+    def create_card(cls, player_round_id=None, round_id=None, move=None, name=None, status=None):
+        if player_round_id is None or round_id is None:
+            return None
+
+        if status is None:
+            status = ChoicesUtil.CARD_STATUS.FIELD
+
+        player_round = cls.objects.create(player_round_id=player_round_id, round_id=round_id, move=move, name=name, status=status)
+
+        return player_round
