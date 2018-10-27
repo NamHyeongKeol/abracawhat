@@ -71,6 +71,8 @@ class Game(ModelUtilsMixin):
     def set_round(self):
         round = Round.create_round(game_id=self.id)
 
+        round.set_player_rounds()
+
         return round
 
 
@@ -112,6 +114,15 @@ class Round(ModelUtilsMixin):
 
         return round
 
+    @transaction.atomic(savepoint=False)
+    def set_player_rounds(self):
+        player_id_list = list(self.game.players.values_list('id', flat=True))
+        random.shuffle(player_id_list)
+        for player_id in player_id_list:
+            PlayerRound.create_player_round(player_id=player_id, round_id=self.id)
+
+        return self
+
 
 class PlayerRound(ModelUtilsMixin):
     STATUS = ChoicesUtil.GAME_STATUS
@@ -135,6 +146,18 @@ class PlayerRound(ModelUtilsMixin):
     @property
     def right(self):
         return self.player.right.player_rounds.get(round=self.round)
+
+    @classmethod
+    def create_player_round(cls, player_id=None, round_id=None, hp=NumUtil.DEFAULT_HP, score=NumUtil.DEFAULT_SCORE, status=None):
+        if player_id is None or round_id is None:
+            return None
+
+        if status is None:
+            status = ChoicesUtil.GAME_STATUS.ONGOING
+
+        player_round = cls.objects.create(user_id=player_id, game_id=round_id, hp=hp, score=score, status=status)
+
+        return player_round
 
 
 class Turn(ModelUtilsMixin):
