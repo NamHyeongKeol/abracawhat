@@ -35,15 +35,25 @@ class FieldUtil:
 
 
 class ChoicesUtil:
-    CARD_CHOICES = Choices((1, StringUtil.Card.YONGYONG),
-                           (2, StringUtil.Card.DARK),
-                           (3, StringUtil.Card.WIND),
-                           (4, StringUtil.Card.OWL),
-                           (5, StringUtil.Card.STORM),
-                           (6, StringUtil.Card.BLIZZARD),
-                           (7, StringUtil.Card.FIRE),
-                           (8, StringUtil.Card.POTION),
-                           )
+    CARD_TYPES_BY_NAME = Choices(StringUtil.Card.YONGYONG,
+                                 StringUtil.Card.DARK,
+                                 StringUtil.Card.WIND,
+                                 StringUtil.Card.OWL,
+                                 StringUtil.Card.STORM,
+                                 StringUtil.Card.BLIZZARD,
+                                 StringUtil.Card.FIRE,
+                                 StringUtil.Card.POTION,
+                                 )
+
+    CARD_TYPES_BY_NUM = Choices((1, StringUtil.Card.YONGYONG),
+                                (2, StringUtil.Card.DARK),
+                                (3, StringUtil.Card.WIND),
+                                (4, StringUtil.Card.OWL),
+                                (5, StringUtil.Card.STORM),
+                                (6, StringUtil.Card.BLIZZARD),
+                                (7, StringUtil.Card.FIRE),
+                                (8, StringUtil.Card.POTION),
+                                )
 
     DEFAULT_STATUS = Choices('DEFAULT')
     GAME_STATUS = Choices('CREATING', 'ONGOING', 'PENDING', 'DELETED', 'FINISHIED', )

@@ -123,6 +123,17 @@ class Round(ModelUtilsMixin):
 
         return self
 
+    @transaction.atomic(savepoint=False)
+    def set_cards(self):
+
+        return self
+
+    @transaction.atomic(savepoint=False)
+    def create_cards(self):
+        for i in range(1,9):
+            for j in range(i):
+                Card.create_card(round_id=self.id, name=ChoicesUtil.CARD_TYPES_BY_NUM[j])
+
 
 class PlayerRound(ModelUtilsMixin):
     STATUS = ChoicesUtil.GAME_STATUS
@@ -177,11 +188,11 @@ class Card(ModelUtilsMixin):
                                      related_name='cards')
     round = models.ForeignKey(Round, on_delete=models.CASCADE, db_index=True, related_name='cards')
     move = models.ForeignKey(Move, on_delete=models.CASCADE, db_index=True, null=True, related_name='cards')
-    name = models.CharField(max_length=100, choices=ChoicesUtil.CARD_CHOICES, db_index=True)
+    name = models.CharField(max_length=100, choices=ChoicesUtil.CARD_TYPES_BY_NUM, db_index=True)
 
     @classmethod
     def create_card(cls, player_round_id=None, round_id=None, move=None, name=None, status=None):
-        if player_round_id is None or round_id is None:
+        if name is None or round_id is None:
             return None
 
         if status is None:
